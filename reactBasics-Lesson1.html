@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>React Basics</title>
+    <title>Lesson 1</title>
   </head>
   <body>
     <div class="js-container"></div>
@@ -16,16 +16,30 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
     
-    const button = <button>hello</button>;
+    const button = <button>good job!</button>;
 
-    const paragraph = <p>paragraph of text</p>;
+    const name = 'Teo';
+    const socks = 'Cotton Socks';
+    const socksPrice = 10;
+    let totalPrice = 0;
+    totalPrice += 2*socksPrice;
+    const add = <button>Add to Cart</button>;
+
+
+console.log(totalPrice);
+    const paragraph = <p>My Name is</p>;
 
 const div = (
     <div>
-        <button>hello</button>
-        <p>paragraph of text {2+2}</p>
+        {button}
+    <p>My Name is {name}</p>
+    <p>{socks}</p>
+    <p>{socksPrice}</p>
+    <p>{add}</p>
+    
     </div>
   );
+  
 
       const container = document.querySelector('.js-container');
       ReactDOM.createRoot(container).render(div);
