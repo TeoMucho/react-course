@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
-    
+
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
     
@@ -77,8 +77,15 @@
         sender: 'robot',
          id: 'id4'
       }];
+
+      function sendMessage() {
+        console.log('send message');
+      }
+
       return(
       <>
+        <button onClick={sendMessage}>Send message</button>
+
         {chatMessages.map((chatMessage) => {
               return (
               <ChatMessage 
