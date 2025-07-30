@@ -80,17 +80,11 @@ const array = React.useState(
       }]
 );
 
-  const chatMessages = array[0];     
+  const chatMessages = array[0];
+  const setChatMessages = array[1];     
 
-      function sendMessage() {
-       chatMessages.push({
-        message: 'test',
-        sender: 'user',
-        id: crypto.randomUUID()
-       });
-       console.log(chatMessages);
-      }
-
+      function sendMessage() {}
+      
       return(
       <>
         <button onClick={sendMessage}>Send message</button>
