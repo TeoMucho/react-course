@@ -18,8 +18,8 @@
     <script type="text/babel">
     
       //comment
-    function ChatInput(chatMessages, setChatMessages) {
-      const [inputText,setInputText]= React.useState('')
+    function ChatInput({chatMessages, setChatMessages}) {
+      const [inputText,setInputText]= React.useState('');
 
       function saveInputText (event) {
        setInputText(event.target.value);
@@ -27,11 +27,10 @@
       }
 
       function sendMessage () {
-        console.log(inputText)
          setChatMessages([
           ...chatMessages,
         {
-          message: 'test',
+          message: inputText,
           sender: 'user',
           id: crypto.randomUUID()
         }
@@ -128,10 +127,11 @@
     <>
        <ChatInput
         chatMessages={chatMessages}
-        setChatMessages={setChatMessages}
-       />
+        setChatMessages={setChatMessages} 
+        />
        <ChatMessages
-       chatMessages={chatMessages} />
+       chatMessages={chatMessages} 
+       />
        
     </>
     )
