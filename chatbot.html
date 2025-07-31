@@ -18,7 +18,7 @@
     <script type="text/babel">
     
       //comment
-    function ChatInput() {
+    function ChatInput(chatMessages, setChatMessages) {
       const [inputText,setInputText]= React.useState('')
 
       function saveInputText (event) {
@@ -79,7 +79,7 @@
       );
     }
 
-    function ChatMessages() {
+    function ChatMessages({chatMessages}) {
 
       return(
       <>
@@ -126,8 +126,12 @@
       return (
      
     <>
-       <ChatInput />
-       <ChatMessages />
+       <ChatInput
+        chatMessages={chatMessages}
+        setChatMessages={setChatMessages}
+       />
+       <ChatMessages
+       chatMessages={chatMessages} />
        
     </>
     )
