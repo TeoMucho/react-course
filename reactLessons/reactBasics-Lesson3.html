@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 1</title>
+  </head>
+  <body>
+     <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
+
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+    
+
+    
+
+
+
+    function App() {
+      const [count,setcount]= React.useState(0);
+
+        
+      function countClicked() {
+        setcount(count + 1);
+        console.log(count);
+      }
+
+      function buttonText () {
+         if (count===1) {
+          return `clicked ${count} time`;
+        } else {
+          return `Clicked ${count} times`;
+        }
+      }
+
+      return <button onClick= {countClicked}> {buttonText()}</button>;
+      
+
+      //musst return schreiben damit react rendert und wieder gibt
+    }
+
+
+
+
+
+const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />
+      );
+  </script>
+  </body>
+</html>
+
+
