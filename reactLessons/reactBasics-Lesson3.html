@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lesson 1</title>
+    <title>Lesson 3</title>
   </head>
   <body>
      <div class="js-container"></div>
@@ -15,34 +15,56 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-    
-
-    
-
-
-
-    function App() {
-      const [count,setcount]= React.useState(0);
-
+   
+   
+   function Counter({count, onIncrease}) {
+        function increaseCount() {
+         setCount(prev => prev + 1);
+  }
         
-      function countClicked() {
-        setcount(count + 1);
-        console.log(count);
+        //nicht direkt +1 ins set count, sondern funktion übergeben, damit der aktuelle Wert genommen wird
+
+
+
+
+        return (
+          <>
+          <button onClick={onIncrease}>
+            Clicked {count} {count === 1 ? 'time' : 'times'}
+          </button> 
+
+          
+          </>
+        );
+        
       }
 
-      function buttonText () {
-         if (count===1) {
-          return `clicked ${count} time`;
-        } else {
-          return `Clicked ${count} times`;
+      function App() {
+
+        const [count, setCount] = React.useState(0);
+
+        function increaseCount() {
+          setCount(prev => prev + 1);
         }
-      }
 
-      return <button onClick= {countClicked}> {buttonText()}</button>;
-      
+        function resetCount() {
+          setCount(0);
+        }
+
+        return (
+          <div>
+            <Counter count={count} onIncrease={increaseCount} />
+            <Counter count={count} onIncrease={increaseCount} />
+            <br /><br />
+            <button onClick={resetCount}>Reset</button> {/* Nman kann button auch direkt einführen hier */}
+          </div>
+
+        ) //hier wird die Counter Komponente 2x gerendert, also 2 buttons!
+        //alles oben ist in Counter Komponente, die dann in App gerendert wird
+      }
 
       //musst return schreiben damit react rendert und wieder gibt
-    }
+    
 
 
 
