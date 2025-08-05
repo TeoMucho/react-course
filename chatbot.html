@@ -203,8 +203,9 @@ body {
       React.useEffect(() => {
 
        const containerELem = chatMessagesRef.current;
+       //Das ist Container Element
        if (containerELem) {
-         containerELem.scrollTop = containerELem.scrollHeight;
+         containerELem.scrollTop = containerELem.scrollHeight; //das scrollt nach unten nach rendern , weil chatMessages sich verändert hat, und es in UseEffect steht.
        }
       
       } , [chatMessages]);
