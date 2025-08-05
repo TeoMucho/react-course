@@ -2,6 +2,22 @@
 <html>
   <head>
     <title>chatbot</title>
+    <style>
+      .send-button {
+        background-color: rgb(25, 135 ,84);
+        color: white;
+        padding: 12px 20px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+
+      }
+      
+    </style>
+
+
   </head>
   <body>
     <div class="js-container"></div>
@@ -17,15 +33,16 @@
     <script type="text/babel">
     
       //comment
-    function ChatInput({chatMessages, setChatMessages}) {
+    function ChatInput({chatMessages, setChatMessages,isLoading, setIsLoading}) {
       const [inputText,setInputText]= React.useState('');
+     
 
       function saveInputText (event) {
        setInputText(event.target.value);
 
       }
 
-      function sendMessage () {
+      async function sendMessage () {
         const newChatMessages = [
           ...chatMessages,
         {
@@ -36,8 +53,9 @@
       ]
 
          setChatMessages(newChatMessages);
+        setIsLoading(true);
 
-      const response= Chatbot.getResponse(inputText);
+      const response= await Chatbot.getResponseAsync(inputText);
 
          setChatMessages([
           ...newChatMessages,
@@ -49,7 +67,7 @@
       ]);
 
         setInputText('');
-
+        setIsLoading(false);
       }
 
       return (
@@ -67,7 +85,8 @@
           }
           />
           <button
-          onClick={sendMessage}>Send</button>
+          onClick={sendMessage}
+          className="send-button">Send</button>
         </>
         
       );
@@ -141,6 +160,7 @@
          id: 'id4'
       }]
 );
+const [isLoading, setIsLoading] = React.useState(false);
   //const [chatMessages, setChatMessages] = array; 
   //const chatMessages = array[0];
   //const setChatMessages = array[1];     
@@ -152,11 +172,14 @@
        <ChatInput
         chatMessages={chatMessages}
         setChatMessages={setChatMessages} 
+         isLoading={isLoading} 
+        setIsLoading={setIsLoading}
         />
        <ChatMessages
        chatMessages={chatMessages} 
        />
        
+       {isLoading && <p>🤖 Bot is typing...</p>}
     </>
     )
     }
