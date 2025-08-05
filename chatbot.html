@@ -28,7 +28,31 @@
         align-items: center;
         margin-bottom: 10px;
       }
-      
+
+      .app-container {
+        max-width: 600px;
+        margin-left:  auto;
+        margin-right: auto;
+        
+      }
+
+      .chat-message-user {
+        display:flex;
+        justify-content: end;
+      }
+      .chat-message-robot {
+        display:flex;
+        justify-content: start;
+      }
+      .chat-message-text {
+        background-color: #f1f1f1;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 70%;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
     </style>
 
 
@@ -128,10 +152,14 @@
       }
         */
       return (
-        <div >
-          {sender === 'robot' && (
+        <div 
+        className={sender=== 'user' ? 'chat-message-user' : 'chat-message-robot'}
+        >
+        {sender === 'robot' && (
             <img src="robot.png" width="50" />)}
-        {message}
+            <div className="chat-message-text">
+                {message}
+            </div>
          {sender === 'user' && (
           <img src="user.png" width="50" />)}
         </div>
@@ -185,7 +213,7 @@ const [isLoading, setIsLoading] = React.useState(false);
 
       return (
      
-    <>
+    <div className="app-container">
        <ChatInput
         chatMessages={chatMessages}
         setChatMessages={setChatMessages} 
@@ -197,7 +225,7 @@ const [isLoading, setIsLoading] = React.useState(false);
        />
        
        {isLoading && <p>🤖 Bot is typing...</p>}
-    </>
+    </div>
     )
     }
 
