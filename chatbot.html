@@ -14,6 +14,20 @@
         cursor: pointer;
 
       }
+      .chat-input {
+        padding: 10px;
+        font-size: 16px;
+        width: 300px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+
+        flex-grow: 1;
+      }
+      .chat-input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
       
     </style>
 
@@ -72,7 +86,9 @@
 
       return (
         <>
+        <div className="chat-input-container">
           <input placeholder="Send a message to Chatbot" size="30"
+          className="chat-input"
           onChange={saveInputText}
           value = {inputText} 
           onKeyDown={(event) => {
@@ -87,6 +103,7 @@
           <button
           onClick={sendMessage}
           className="send-button">Send</button>
+          </div>
         </>
         
       );
