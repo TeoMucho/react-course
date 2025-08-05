@@ -32,13 +32,17 @@ body {
       .chat-input-container {
         display: flex;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: 60px;
       }
 
       .app-container {
         max-width: 600px;
         margin-left:  auto;
         margin-right: auto;
+
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
         
       }
 
@@ -58,7 +62,11 @@ body {
         margin: 5px;
         
       }
+      .chat-messages-container {
+        flex-grow: 1;
+        margin-top: 20px;
 
+      }
     </style>
 
 
@@ -175,7 +183,8 @@ body {
     function ChatMessages({chatMessages}) {
 
       return(
-      <>
+      <div className="chat-messages-container">
+
         {chatMessages.map((chatMessage) => {
               return (
               <ChatMessage 
@@ -185,7 +194,7 @@ body {
               />
             );
            })}
-      </>
+      </div>
       );
     }
 
@@ -220,15 +229,16 @@ const [isLoading, setIsLoading] = React.useState(false);
       return (
      
     <div className="app-container">
+       
+       <ChatMessages
+       chatMessages={chatMessages} 
+       />
        <ChatInput
         chatMessages={chatMessages}
         setChatMessages={setChatMessages} 
          isLoading={isLoading} 
         setIsLoading={setIsLoading}
         />
-       <ChatMessages
-       chatMessages={chatMessages} 
-       />
        
        {isLoading && <p>🤖 Bot is typing...</p>}
     </div>
