@@ -197,7 +197,7 @@ body {
       );
     }
 
-    function ChatMessages({chatMessages}) {
+    function ChatMessages({chatMessages, isLoading}) {
       const chatMessagesRef = React.useRef(null);
 
       React.useEffect(() => {
@@ -224,6 +224,12 @@ body {
               />
             );
            })}
+           {isLoading && (
+        <div className="chat-message-robot">
+          <img src="robot.png" width="50" className="chat-message-profile" />
+          <div className="chat-message-text">🤖 Bot is typing...</div>
+        </div>
+      )}
       </div>
       );
     }
@@ -262,11 +268,12 @@ const [isLoading, setIsLoading] = React.useState(false);
        
        <ChatMessages
        chatMessages={chatMessages} 
+       isLoading={isLoading}
        />
        <ChatInput
         chatMessages={chatMessages}
         setChatMessages={setChatMessages} 
-         isLoading={isLoading} 
+         
         setIsLoading={setIsLoading}
         />
        
