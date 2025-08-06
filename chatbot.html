@@ -228,7 +228,9 @@ body {
            {isLoading && (
         <div className="chat-message-robot">
           <img src="robot.png" width="50" className="chat-message-profile" />
-          <div className="chat-message-text">🤖 Bot is typing...</div>
+          <div className="chat-message-text">
+            <img src="loading-spinner.gif" width="30"/>
+          </div>
         </div>
       )}
       </div>
