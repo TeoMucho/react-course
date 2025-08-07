@@ -162,6 +162,25 @@ body {
       );
     }
 
+    function useAutoScroll(dependencies) {
+        // It's highly recommend to rename this to something
+        // more generic like containerRef. This will make the
+        // code make more sense if we ever reuse this code in
+        // other components.
+        const containerRef = React.useRef(null);
+
+        React.useEffect(() => {
+         
+          const containerElem = containerRef.current;
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight;
+          }
+       
+        }, dependencies);
+
+        return containerRef;
+      }
+
     function ChatMessage({ message, sender }) {
       // You can also destructure props like this:
       // function ChatMessage(props) {}) {
@@ -198,17 +217,9 @@ body {
     }
 
     function ChatMessages({chatMessages, isLoading}) {
-      const chatMessagesRef = React.useRef(null);
+      const chatMessagesRef = useAutoScroll([chatMessages]);
 
-      React.useEffect(() => {
-
-       const containerELem = chatMessagesRef.current;
-       //Das ist Container Element
-       if (containerELem) {
-         containerELem.scrollTop = containerELem.scrollHeight; //das scrollt nach unten nach rendern , weil chatMessages sich verändert hat, und es in UseEffect steht.
-       }
-      
-      } , [chatMessages]);
+       
 
       return(
       
