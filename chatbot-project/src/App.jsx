@@ -1,70 +1,9 @@
 import { useState,useRef,useEffect } from 'react'
-import { Chatbot } from 'supersimpledev';
 import './App.css'
 import RobotProfileImage from './assets/robot.png'
 import UserProfileImage from './assets/user.png'
 import LoadingSpinner from './assets/loading-spinner.gif'
-function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
-      const [inputText,setInputText]= useState('');
-     
 
-      function saveInputText (event) {
-       setInputText(event.target.value);
-
-      }
-
-      async function sendMessage () {
-        const newChatMessages = [
-          ...chatMessages,
-        {
-          message: inputText,
-          sender: 'user',
-          id: crypto.randomUUID()
-        }
-      ]
-
-         setChatMessages(newChatMessages);
-        setIsLoading(true);
-
-      const response= await Chatbot.getResponseAsync(inputText);
-
-         setChatMessages([
-          ...newChatMessages,
-        {
-          message: response,
-          sender: 'robot',
-          id: crypto.randomUUID()
-        }
-      ]);
-
-        setInputText('');
-        setIsLoading(false);
-      }
-
-      return (
-        <>
-        <div className="chat-input-container">
-          <input placeholder="Send a message to Chatbot" size="30"
-          className="chat-input"
-          onChange={saveInputText}
-          value = {inputText} 
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              sendMessage();
-            } else if (event.key === 'Escape') {
-              setInputText('');
-            }
-          }
-          }
-          />
-          <button
-          onClick={sendMessage}
-          className="send-button">Send</button>
-          </div>
-        </>
-        
-      );
-    }
 
     function useAutoScroll(dependencies) {
         // It's highly recommend to rename this to something
