@@ -1,6 +1,9 @@
 import { useState,useRef,useEffect } from 'react'
-import { Chatbot } from './supersimpledev';
+import { Chatbot } from 'supersimpledev';
 import './App.css'
+import RobotProfileImage from './assets/robot.png'
+import UserProfileImage from './assets/user.png'
+import LoadingSpinner from './assets/loading-spinner.gif'
 function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
       const [inputText,setInputText]= useState('');
      
@@ -105,14 +108,14 @@ function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
         className={sender=== 'user' ? 'chat-message-user' : 'chat-message-robot'}
         >
         {sender === 'robot' && (
-            <img src="robot.png" width="50" className="chat-message-profile" />)}
+            <img src={RobotProfileImage} width="50" className="chat-message-profile" />)}
             
             <div className="chat-message-text">
                 {message}
             </div>
 
          {sender === 'user' && (
-          <img src="user.png" width="50" className="chat-message-profile" />)}
+          <img src={UserProfileImage} width="50" className="chat-message-profile" />)}
         </div>
       );
     }
@@ -139,9 +142,9 @@ function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
            })}
            {isLoading && (
         <div className="chat-message-robot">
-          <img src="robot.png" width="50" className="chat-message-profile" />
+          <img src={RobotProfileImage} width="50" className="chat-message-profile" />
           <div className="chat-message-text">
-            <img src="loading-spinner.gif" width="30"/>
+            <img src={LoadingSpinner} width="30"/>
           </div>
         </div>
       )}
