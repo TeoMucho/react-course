@@ -12,34 +12,7 @@
         
       }
 
-      .chat-message-user {
-        display:flex;
-        justify-content: end;
-        align-items: center;
-        
-      }
-      .chat-message-robot {
-        display:flex;
-        justify-content: start;
-         align-items: center;
-      }
       
-    
-      .chat-message-text {
-        background-color: #f1f1f1;
-        padding: 10px;
-        border-radius: 10px;
-        max-width: 300px;
-        margin: 5px;
-        
-      }
-
-      .chat-message-profile {
-        width: 45px;
-        height: 45px;
-        object-fit: contain;
-        flex-shrink: 0;
-        margin: 0 8px;}
 
       .chat-messages-container {
         flex-grow: 1;
