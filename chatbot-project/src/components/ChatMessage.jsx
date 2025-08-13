@@ -1,5 +1,5 @@
 import RobotProfileImage from '../assets/robot.png';
-import UserProfileImage from '../assets/user.png';
+import NaughtyUser from '../assets/NaughtyUser.jpg';
 import './ChatMessage.css';
 
 export default function ChatMessage({ message, sender }) {
@@ -18,7 +18,7 @@ export default function ChatMessage({ message, sender }) {
 
       {sender === 'user' && (
         <img
-          src={UserProfileImage}
+          src={NaughtyUser}
           width="50"
           alt="User"
           className="chat-message-profile"

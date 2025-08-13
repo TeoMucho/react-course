@@ -1,11 +1,9 @@
-import { useState } from 'react'
+import {  useState } from 'react'
 import './App.css'
 import {ChatInput} from './components/ChatInput'
 import  ChatMessage  from './components/ChatMessage.jsx'
 import {ChatMessages} from './components/ChatMessages.jsx'
 
-
-    
 
   function App() {
 
@@ -18,6 +16,8 @@ import {ChatMessages} from './components/ChatMessages.jsx'
       ]
 );
 const [isLoading, setIsLoading] = useState(false);
+ 
+
   //const [chatMessages, setChatMessages] = array; 
   //const chatMessages = array[0];
   //const setChatMessages = array[1];     

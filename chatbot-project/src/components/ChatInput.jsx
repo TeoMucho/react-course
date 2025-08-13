@@ -1,10 +1,15 @@
 import { Chatbot } from 'supersimpledev';
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import './ChatInput.css'
 
 export function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
       const [inputText,setInputText]= useState('');
      
+      useEffect(() => {
+    Chatbot.addResponses({
+      'Hola': 'HOLA ME GUSTAAA'
+    });
+  }, []);
 
       function saveInputText (event) {
        setInputText(event.target.value);
