@@ -2,7 +2,8 @@ import RobotProfileImage from '../assets/robot.png'
 import LoadingSpinner from '../assets/loading-spinner.gif'
 import {useAutoScroll} from './AutoScroll.jsx';
 import ChatMessage from './ChatMessage.jsx';
-import './ChatMessages.css'; 
+import './ChatMessages.css';
+
 
  export function ChatMessages({chatMessages, isLoading}) {
       const chatMessagesRef = useAutoScroll([chatMessages]);
@@ -20,7 +21,8 @@ import './ChatMessages.css';
               <ChatMessage 
                 message={chatMessage.message} 
                 sender={chatMessage.sender}
-                key={chatMessage.id} 
+                key={chatMessage.id}
+                time={chatMessage.time} 
               />
             );
            })}

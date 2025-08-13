@@ -2,7 +2,7 @@ import RobotProfileImage from '../assets/robot.png';
 import NaughtyUser from '../assets/NaughtyUser.jpg';
 import './ChatMessage.css';
 
-export default function ChatMessage({ message, sender }) {
+export default function ChatMessage({ message, sender, time }) {
   return (
     <div className={sender === 'user' ? 'chat-message-user' : 'chat-message-robot'}>
       {sender === 'robot' && (
@@ -15,6 +15,7 @@ export default function ChatMessage({ message, sender }) {
       )}
 
       <div className="chat-message-text">{message}</div>
+      <div className="chat-message-time">{time}</div>
 
       {sender === 'user' && (
         <img

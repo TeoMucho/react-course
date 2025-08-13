@@ -1,6 +1,7 @@
 import { Chatbot } from 'supersimpledev';
 import { useState, useEffect} from 'react'
 import './ChatInput.css'
+import dayjs from 'dayjs';
 
 export function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
       const [inputText,setInputText]= useState('');
@@ -22,7 +23,8 @@ export function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
         {
           message: inputText,
           sender: 'user',
-          id: crypto.randomUUID()
+          id: crypto.randomUUID(),
+           time: dayjs().format('HH:mm'),
         }
       ]
 
