@@ -38,7 +38,8 @@ export function ChatInput({chatMessages, setChatMessages, setIsLoading}) {
         {
           message: response,
           sender: 'robot',
-          id: crypto.randomUUID()
+          id: crypto.randomUUID(),
+          time: dayjs().format('HH:mm'),
         }
       ]);
 

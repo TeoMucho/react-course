@@ -3,7 +3,7 @@ import './App.css'
 import {ChatInput} from './components/ChatInput'
 import  ChatMessage  from './components/ChatMessage.jsx'
 import {ChatMessages} from './components/ChatMessages.jsx'
-
+import dayjs from 'dayjs';
 
   function App() {
 
@@ -11,7 +11,8 @@ import {ChatMessages} from './components/ChatMessages.jsx'
 [{
         message: 'Hello, how can I help you?',
         sender: 'robot',
-         id: 'id2'
+         id: 'id2',
+         time: dayjs().format('HH:mm')
       }
       ]
 );

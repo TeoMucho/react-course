@@ -2,6 +2,7 @@
         display:flex;
         justify-content: end;
         align-items: center;
+        flex-direction: row-reverse;
         
       }
       .chat-message-robot {
@@ -29,3 +30,11 @@
       border-radius: 45px;
       object-fit: cover;
       }
+
+      .chat-message-time {
+        font-size: 0.8em;
+        color: #888;
+        margin-left: 10px;
+        align-self: center;
+      }
+     

@@ -15,7 +15,7 @@ export default function ChatMessage({ message, sender, time }) {
       )}
 
       <div className="chat-message-text">{message}</div>
-      <div className="chat-message-time">{time}</div>
+      {sender === 'robot' && <div className="chat-message-time">{time} </div>}
 
       {sender === 'user' && (
         <img
@@ -23,8 +23,11 @@ export default function ChatMessage({ message, sender, time }) {
           width="50"
           alt="User"
           className="chat-message-profile"
+          
+          
         />
       )}
+      {sender === 'user' && <div className="chat-message-time">{time} </div>}
     </div>
   );
 }
