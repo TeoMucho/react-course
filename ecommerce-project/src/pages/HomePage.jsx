@@ -3,7 +3,7 @@ import './HomePage.css'
 
 export function HomePage () {
   return (
-  <>    
+  <>   <header  className="header"> 
       <div className="left-section">
         <a href="index.html" className="header-link">
           <img className="logo"
@@ -33,7 +33,7 @@ export function HomePage () {
           <div className="cart-text">Cart</div>
         </a>
       </div>
-    
+    </header>
 
     <div className="home-page">
       <div className="products-grid">
