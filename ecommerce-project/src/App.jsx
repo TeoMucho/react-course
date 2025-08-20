@@ -1,17 +1,14 @@
-import {Route, Routes} from 'react-router'
-import { HomePage } from './pages/HomePage'
-import './App.css'
+import { Routes, Route } from "react-router-dom"; // wichtig: react-router-dom
+import { HomePage } from "./pages/HomePage";
+import { CheckoutPage } from "./pages/CheckoutPage";
+import "./App.css";
 
-export function App() {
-  
-
+export default function App() {
   return (
     <Routes>
       <Route index element={<HomePage />} />
-      <Route path="checkout" element={<div>Checkout Page</div>}></Route>
+      <Route path="/checkout" element={<CheckoutPage />} />
     </Routes>
-   
-  )
+  );
 }
 
-export default App
