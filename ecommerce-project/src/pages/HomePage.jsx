@@ -23,10 +23,9 @@ export function HomePage () {
         </div>
 
         <div className="right-section">
-          {/* Orders: nur verlinken, wenn du auch eine Route /orders hast */}
-          {/* <Link className="orders-link header-link" to="/orders">
+         <Link className="orders-link header-link" to="/orders">
             <span className="orders-text">Orders</span>
-          </Link> */}
+          </Link>
 
           <Link className="cart-link header-link" to="/checkout">
             <img className="cart-icon" src="/images/icons/cart-icon.png" alt="Cart" />
