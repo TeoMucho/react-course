@@ -1,4 +1,4 @@
-import './header.css'
+import { Header } from "../components/Header";
 import './HomePage.css'
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,7 @@ export function HomePage () {
 <title>Ecommerce Project</title>
 
    
+<Header />
 
     <div className="home-page">
       <div className="products-grid">
