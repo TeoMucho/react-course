@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import "./OrdersPage.css";
 import { Link } from "react-router-dom";
-;
+
 
 export function OrdersPage() {
   return (
