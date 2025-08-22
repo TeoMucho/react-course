@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import './CheckoutPage.css';
 import { CheckoutHeader } from "../../components/CheckoutHeader";
-
+import { Helmet } from "react-helmet-async";
 
 export function CheckoutPage() {
     return (
         <>
-        <title>Checkout</title>
+       <Helmet>
+               <title>Checkout</title>
+               <link rel="icon" href="/cart-favicon.png?v=1" type="image/png" />
+             </Helmet>
 
 <CheckoutHeader />
            
