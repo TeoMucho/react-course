@@ -2,14 +2,16 @@ import { Header } from "../components/Header";
 import "./OrdersPage.css";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import ordersFavicon from "../assets/images/orders-favicon.png";
 
 export function OrdersPage() {
   return (
     <>
 <Helmet>
         <title>Orders</title>
-        <link rel="icon" href="/orders-favicon.png?v=1" type="image/png" />
+        <link rel="icon" href={`${ordersFavicon}?v=1`} type="image/png" />
       </Helmet>
+      
       <Header />
 
       <div className="orders-page">
