@@ -1,12 +1,16 @@
 import { Header } from "../components/Header";
 import './HomePage.css'
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 export function HomePage () {
   return (
     <>
-<title>Ecommerce Project</title>
 
+<Helmet>
+        <title>Home - Ecommerce</title>
+        <link rel="icon" href="/home-favicon.png?v=1" type="image/png" />
+      </Helmet>
    
 <Header />
 

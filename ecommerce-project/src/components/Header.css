@@ -25,7 +25,7 @@
   }
 }
 
-.header .header-link {
+.header .header-NavLink {
   display: inline-block;
   padding: 6px 9.5px;
   border-radius: 2px;
@@ -34,7 +34,7 @@
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.header .header-link:hover {
+.header .header-NavLink:hover {
   border: 1px solid white;
 }
 
@@ -103,22 +103,24 @@
   justify-content: end;
 }
 
-.header .orders-link {
+.header .orders-NavLink {
   color: white;
 
   display: flex;
   align-items: center;
   padding-left: 13px;
   padding-right: 13px;
+  
 }
 
 .header .orders-text {
   display: block;
   font-size: 15px;
   font-weight: 700;
+  text-decoration: underline;
 }
 
-.header .cart-link {
+.header .cart-NavLink {
   color: white;
   display: flex;
   align-items: center;
