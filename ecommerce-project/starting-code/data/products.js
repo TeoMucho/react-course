@@ -16,7 +16,7 @@ export const products = [
     name: "Intermediate Size Basketball",
     rating: {
       stars: 4,
-      count: 127
+      count: 127  
     },
     priceCents: 2095,
     keywords: ["sports", "basketballs"]
