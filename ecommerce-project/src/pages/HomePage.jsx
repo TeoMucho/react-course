@@ -30,7 +30,8 @@ export function HomePage () {
 
           <div className="product-rating-container">
             <img className="product-rating-stars"
-              src={`images/ratings/rating-${product.rating.stars * 10}`} />
+              src={`/images/ratings/rating-${product.rating.stars * 10}.png`}
+  alt={`${product.rating.stars} stars`} />
             <div className="product-rating-count link-primary">
               {product.rating.count}
             </div>
