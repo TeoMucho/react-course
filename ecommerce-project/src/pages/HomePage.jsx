@@ -1,18 +1,18 @@
+import axios from 'axios';
 import { Header } from "../components/Header";
 import './HomePage.css'
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { products } from '../../starting-code/data/products';  
 
+
 export function HomePage () {
-  fetch ('http://localhost:3000/api/products')
+  axios.get ('http://localhost:3000/api/products')
   .then((response) => {
-    response.json().then((data) => {
-      console.log(data)
+    response.data
 
 
   })
-})
   return (
     <>
 
