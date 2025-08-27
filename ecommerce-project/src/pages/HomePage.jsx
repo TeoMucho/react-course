@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect,useState } from "react";
 import { Header } from "../components/Header";
 import './HomePage.css'
 import { Link } from "react-router-dom";
@@ -7,12 +8,15 @@ import { products } from '../../starting-code/data/products';
 
 
 export function HomePage () {
-  axios.get ('http://localhost:3000/api/products')
+  const [products, setProducts] = useState ([]);
+
+  useEffect(() => {
+    axios.get ('http://127.0.0.1:3000/api/products')
   .then((response) => {
-    response.data
-
-
+    setProducts(response.data);
   })
+  },[] );
+  
   return (
     <>
 
