@@ -1,12 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 
-export function Header({ cart }) {
-  let totalQuantity = 0;
-
-  cart.forEach((cartItem) => {
-    totalQuantity += cartItem.quantity;
-  });
+export function Header({ cart = [] }) {              // 👈 Default: leeres Array
+  const totalQuantity = (cart ?? []).reduce(         // 👈 nie auf undefined iterieren
+    (sum, item) => sum + (item?.quantity ?? 0),
+    0
+  );
 
   return (
     <header className="header">
