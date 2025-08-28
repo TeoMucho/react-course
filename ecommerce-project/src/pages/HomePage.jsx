@@ -4,18 +4,27 @@ import { Header } from "../components/Header";
 import './HomePage.css'
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { products } from '../../starting-code/data/products';  
+//import { products } from '../../starting-code/data/products';  importieren aus Backend 
 
 
 export function HomePage () {
   const [products, setProducts] = useState ([]);
+  const [cart, setCart] = useState ([]);
 
   useEffect(() => {
     axios.get ('http://127.0.0.1:3000/api/products')
   .then((response) => {
     setProducts(response.data);
+    })
+    axios.get('http://127.0.0.1:3000/api/cart-items')
+  .then ((response) => {
+    setCart(response.data);
+
+
   })
   },[] );
+
+  
   
   return (
     <>
@@ -25,7 +34,7 @@ export function HomePage () {
         <link rel="icon" href="/home-favicon.png?v=1" type="image/png" />
       </Helmet>
    
-<Header />
+<Header cart={cart} />
 
     <div className="home-page">
       <div className="products-grid">
