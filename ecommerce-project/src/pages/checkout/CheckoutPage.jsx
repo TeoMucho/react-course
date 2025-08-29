@@ -1,10 +1,20 @@
+import axios from 'axios';
 import { Link } from "react-router-dom";
+import{ useEffect, useState } from 'react';
 import './CheckoutPage.css';
 import { CheckoutHeader } from "../../components/CheckoutHeader";
 import { Helmet } from "react-helmet-async";
 import {formatMoney} from '../../utils/money';
 
 export function CheckoutPage({ cart }) {
+    const [deliveryOptions,setDeliveryOptions] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/delivery-options').then((response) => {
+            setDeliveryOptions(response.data);
+        })
+    },[])
+
     return (
         <>
             <Helmet>

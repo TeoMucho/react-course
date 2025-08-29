@@ -13,14 +13,22 @@ export default function App() {
    
   useEffect(() => {
 
-  axios.get('http://127.0.0.1:3000/api/cart-items?expand=product')
-      .then ((response) => {
-        setCart(response.data);
+  const controller = new AbortController();
+
+    axios.get('/api/cart-items', { params: { expand: 'product' }, signal: controller.signal })
+      .then((response) => {
+        // passt sich an, falls die API { cartItems: [...] } liefert
+        const data = Array.isArray(response.data) ? response.data : (response.data?.cartItems ?? []);
+        setCart(data);
+      })
+      .catch((err) => {
+        if (err.name !== 'CanceledError') {
+          console.error('API error:', err);
+        }
+      });
+
+    return () => controller.abort();
   }, []);
-
-
-
-  })
 
   return (
     <Routes>
