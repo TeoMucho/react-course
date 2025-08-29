@@ -5,7 +5,7 @@ import './HomePage.css'
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 //import { products } from '../../starting-code/data/products';  importieren aus Backend 
-
+import { formatMoney } from '../utils/money';
 
 export function HomePage ({cart}) {
   const [products, setProducts] = useState ([]);
@@ -54,7 +54,7 @@ export function HomePage ({cart}) {
           </div>
 
           <div className="product-price">
-            ${(product.priceCents / 100).toFixed(2)}
+            {formatMoney(product.priceCents)}
           </div>
 
           <div className="product-quantity-container">

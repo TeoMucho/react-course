@@ -13,7 +13,7 @@ export default function App() {
    
   useEffect(() => {
 
-  axios.get('http://127.0.0.1:3000/api/cart-items')
+  axios.get('http://127.0.0.1:3000/api/cart-items?expand=product')
       .then ((response) => {
         setCart(response.data);
   }, []);
