@@ -7,21 +7,16 @@ import { Helmet } from "react-helmet-async";
 //import { products } from '../../starting-code/data/products';  importieren aus Backend 
 
 
-export function HomePage () {
+export function HomePage ({cart}) {
   const [products, setProducts] = useState ([]);
-  const [cart, setCart] = useState ([]);
+  
 
   useEffect(() => {
     axios.get ('http://127.0.0.1:3000/api/products')
   .then((response) => {
     setProducts(response.data);
-    })
-    axios.get('http://127.0.0.1:3000/api/cart-items')
-  .then ((response) => {
-    setCart(response.data);
-
-
-  })
+    });
+   
   },[] );
 
   
