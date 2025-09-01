@@ -31,11 +31,16 @@ export function CheckoutPage({ cart }) {
 
     <div className="checkout-grid">
         <div className="order-summary">
-            {cart.map((cartItem) => {
+            {deliveryOptions.length > 0 && cart.map((cartItem) => {
+              const selectedDeliveryOption= deliveryOptions
+                    .find((deliveryOption) => {
+                        return deliveryOption.id === cartItem.deliveryOptionId;
+                    })
+
                 return (
                     <div key={cartItem.productId} className="cart-item-container">
                         <div className="delivery-date">
-                            Delivery date: Tuesday, June 21
+                            Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMS).format('dddd, MMMM D')}
                         </div>
 
             <div className="cart-item-details-grid">
@@ -66,28 +71,49 @@ export function CheckoutPage({ cart }) {
                     <div className="delivery-options-title">
                         Choose a delivery option:
                     </div>
-                    {deliveryOptions.map((deliveryOption) => {
-                        let priceString = 'Free Shipping';
-                        if (deliveryOption.priceCents > 0) {
-                            priceString = `${formatMoney(deliveryOption.priceCents)} - Shipping`;
-                        }
+                    {deliveryOptions.map((deliveryOption, idx) => {
+  // Preis-Label wie gehabt
+  let priceString = 'Free Shipping';
+  if (deliveryOption.priceCents > 0) {
+    priceString = `${formatMoney(deliveryOption.priceCents)} - Shipping`;
+  }
 
-                        return (
-                            <div key={deliveryOption.id} className="delivery-option">
-                                <input type="radio" checked={deliveryOption.id === cartItem.deliveryOptionId}
-                                    className="delivery-option-input"
-                                    name={`delivery-option-${cartItem.productId}`} />
-                                <div>
-                                    <div className="delivery-option-date">
-                                        {dayjs(deliveryOption.estimatedDeliveryTimeMS).format('dddd,MMMMM,D')}
-                                    </div>
-                                    <div className="delivery-option-price">
-                                        {priceString}
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
+  // 🔧 Datum pro Option berechnen
+  let ts = deliveryOption.estimatedDeliveryTimeMS;
+
+  // Falls die API Sekunden liefert (10-stellig) -> in Millisekunden umrechnen
+  if (typeof ts === 'number' && String(Math.abs(ts)).length === 10) {
+    ts = ts * 1000;
+  }
+
+  // Falls alle Optionen den gleichen Timestamp haben:
+  // - wenn deliveryDays existiert, nimm das
+  // - sonst staggere per Index (idx)
+  let date = dayjs(ts);
+  if (typeof deliveryOption.deliveryDays === 'number') {
+    date = dayjs().startOf('day').add(deliveryOption.deliveryDays, 'day');
+  } else if (!ts || Number.isNaN(ts)) {
+    date = dayjs().startOf('day').add(idx, 'day');
+  }
+
+  let dateLabel = date.format('dddd, MMMM D');
+
+  return (
+    <div key={deliveryOption.id} className="delivery-option">
+      <input
+        type="radio"
+        checked={deliveryOption.id === cartItem.deliveryOptionId}
+        className="delivery-option-input"
+        name={`delivery-option-${cartItem.productId}`}
+        readOnly
+      />
+      <div>
+        <div className="delivery-option-date">{dateLabel}</div>
+        <div className="delivery-option-price">{priceString}</div>
+      </div>
+    </div>
+  );
+})}
 
                 </div>
             </div>
