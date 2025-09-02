@@ -12,6 +12,9 @@ export function CheckoutPage({ cart }) {
 
     const [paymentSummary, setPaymentSummary] = useState(null);
 
+    // FIX: lokale Auswahl je Produkt verwalten
+    const [selectedDeliveryByProduct, setSelectedDeliveryByProduct] = useState({});
+
     useEffect(() => {
         axios.get('/api/delivery-options?expand=estimatedDeliveryTime').then((response) => {
             setDeliveryOptions(response.data);
@@ -20,6 +23,34 @@ export function CheckoutPage({ cart }) {
             setPaymentSummary(response.data);
         })
     }, [])
+
+    // FIX: initialen Stand aus cart übernehmen / synchron halten
+    useEffect(() => {
+        if (Array.isArray(cart)) {
+            const map = {};
+            cart.forEach((item) => {
+                map[item.productId] = item.deliveryOptionId;
+            });
+            setSelectedDeliveryByProduct(map);
+        }
+    }, [cart]);
+
+    // FIX: Handler für Auswahlwechsel
+    const handleChangeDelivery = async (productId, deliveryOptionId) => {
+        setSelectedDeliveryByProduct(prev => ({
+            ...prev,
+            [productId]: deliveryOptionId
+        }));
+
+        // Optional: Server informieren und Summary neu laden
+        try {
+            await axios.post('/api/cart/update-delivery-option', { productId, deliveryOptionId });
+            const res = await axios.get('/api/payment-summary');
+            setPaymentSummary(res.data);
+        } catch (e) {
+            // Fallback: nichts tun / ggf. Toast einbauen
+        }
+    };
 
     return (
         <>
@@ -39,13 +70,13 @@ export function CheckoutPage({ cart }) {
             {deliveryOptions.length > 0 && cart.map((cartItem) => {
               const selectedDeliveryOption= deliveryOptions
                     .find((deliveryOption) => {
-                        return deliveryOption.id === cartItem.deliveryOptionId;
+                        return deliveryOption.id === (selectedDeliveryByProduct[cartItem.productId] ?? cartItem.deliveryOptionId);
                     })
 
                 return (
                     <div key={cartItem.productId} className="cart-item-container">
                         <div className="delivery-date">
-                            Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMS).format('dddd, MMMM D')}
+                            Delivery date: {dayjs(selectedDeliveryOption?.estimatedDeliveryTimeMS).format('dddd, MMMM D')}
                         </div>
 
             <div className="cart-item-details-grid">
@@ -107,10 +138,10 @@ export function CheckoutPage({ cart }) {
     <div key={deliveryOption.id} className="delivery-option">
       <input
         type="radio"
-        checked={deliveryOption.id === cartItem.deliveryOptionId}
+        checked={deliveryOption.id === (selectedDeliveryByProduct[cartItem.productId] ?? cartItem.deliveryOptionId)} // FIX
         className="delivery-option-input"
         name={`delivery-option-${cartItem.productId}`}
-        readOnly
+        onChange={() => handleChangeDelivery(cartItem.productId, deliveryOption.id)} // FIX
       />
       <div>
         <div className="delivery-option-date">{dateLabel}</div>
