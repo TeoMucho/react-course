@@ -15,19 +15,34 @@ export default function App() {
 
   const controller = new AbortController();
 
-    axios.get('/api/cart-items', { params: { expand: 'product' }, signal: controller.signal })
-      .then((response) => {
-        // passt sich an, falls die API { cartItems: [...] } liefert
-        const data = Array.isArray(response.data) ? response.data : (response.data?.cartItems ?? []);
-        setCart(data);
-      })
-      .catch((err) => {
-        if (err.name !== 'CanceledError') {
-          console.error('API error:', err);
-        }
+   let mounted = true;
+
+  const fetchCart = async () => {
+    try {
+      const res = await axios.get('/api/cart-items', {
+        params: { expand: 'product' },
+        signal: controller.signal,
       });
 
-    return () => controller.abort();
+      if (!mounted) return;
+
+      const data = Array.isArray(res.data)
+        ? res.data
+        : (res.data?.cartItems ?? []);
+
+      setCart(data);
+    } catch (err) {
+      if (err?.name === 'CanceledError' || err?.code === 'ERR_CANCELED') return;
+      console.error('API error:', err);
+    }
+  };
+
+  fetchCart();
+
+  return () => {
+    mounted = false;
+    controller.abort();
+  };
   }, []);
 
   return (

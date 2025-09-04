@@ -6,7 +6,7 @@ export function OrderSummary({
   cart = [],
   deliveryOptions = [],
   selectedDeliveryByProduct = {},
-  onSelectDelivery,
+
   loadCart,                    // ⬅️ neu
 }) {
   return (
