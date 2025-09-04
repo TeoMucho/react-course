@@ -3,11 +3,10 @@ import { useEffect, useState } from 'react';
 import './CheckoutPage.css';
 import { CheckoutHeader } from "../../components/CheckoutHeader";
 import { Helmet } from "react-helmet-async";
-import { formatMoney } from '../../utils/money';
 import { OrderSummary } from './OrderSummary';
 import { PaymentSummary } from './PaymentSummary';
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
 
     const [paymentSummary, setPaymentSummary] = useState(null);
@@ -47,7 +46,7 @@ export function CheckoutPage({ cart }) {
             await axios.post('/api/cart/update-delivery-option', { productId, deliveryOptionId });
             const res = await axios.get('/api/payment-summary');
             setPaymentSummary(res.data);
-        } catch (e) {
+        } catch (error) {
             // Fallback: nichts tun / ggf. Toast einbauen
         }
     };
@@ -66,7 +65,13 @@ export function CheckoutPage({ cart }) {
     <div className="page-title">Review your order</div>
 
     <div className="checkout-grid">
-    <OrderSummary cart={cart} deliveryOptions={deliveryOptions} selectedDeliveryByProduct={selectedDeliveryByProduct} handleChangeDelivery={handleChangeDelivery} />
+  <OrderSummary 
+    cart={cart}
+    deliveryOptions={deliveryOptions}
+    selectedDeliveryByProduct={selectedDeliveryByProduct}
+    onSelectDelivery={handleChangeDelivery}
+    loadCart={loadCart}                 // ⬅️ wichtig
+  />
     
         
          
