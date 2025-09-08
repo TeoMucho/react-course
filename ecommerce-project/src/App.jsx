@@ -5,6 +5,7 @@ import "./App.css";
 import { OrdersPage } from "./pages/OrdersPage";
 import { TrackingPage } from "./pages/TrackingPage";
 import { useState, useEffect } from "react";
+import { Header } from "./components/Header";
 import axios from 'axios';
 
 export default function App() {
@@ -46,12 +47,15 @@ export default function App() {
   }, []);
 
   return (
+    <>
+    <Header cart={cart}/>
     <Routes>
       <Route index element={<HomePage cart={cart} />} />
       <Route path="/checkout" element={<CheckoutPage cart={cart} />} />
       <Route path="/orders" element={<OrdersPage cart={cart} />} />
       <Route path="/tracking" element={<TrackingPage />} />
     </Routes>
+    </>
   );
 }
 
